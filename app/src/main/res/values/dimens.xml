@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="view_10" />
+    <dimen name="view_20" />
+    <dimen name="view_30" />
+    <dimen name="view_200dp" />
+    <dimen name="view_50" />
+    <dimen name="txt_14" />
+    <dimen name="view_45" />
+    <dimen name="view_40" />
+    <dimen name="view_5" />
+    <dimen name="txt_12" />
+    <dimen name="view_15" />
+</resources>
