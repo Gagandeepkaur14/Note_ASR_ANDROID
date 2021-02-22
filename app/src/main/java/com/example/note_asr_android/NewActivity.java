@@ -1,6 +1,8 @@
 package com.example.note_asr_android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 public class NewActivity extends Activity {
 
     private static final int CAMERA_REQUEST = 102;
+    private static final int GALLARY_REQUEST = 101;
     TextView drawer_txt, new_note, txt_title, deal_txt;
     EditText title, description;
     Button record, subject;
@@ -47,11 +50,45 @@ public class NewActivity extends Activity {
         share_layout.setVisibility(View.VISIBLE);
 
 
+        drawer_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+
     }
 
-    public void CaptureImage() {
+    private void selectImage() {
+        gallery();
 
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
-}
+
+    public void gallery() {
+
+        final CharSequence[] items = { "Take Photo", "Choose from Library","Cancel" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose Your Option");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                //  boolean result= Utility.checkPermission(ShareDeal.this);
+
+                if (items[item].equals("Take Photo")) {
+                    CaptureImage();
+                }
+            }
+        });
+    }
+
+            public void CaptureImage() {
+
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+
+
+        }
