@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 public class NewActivity extends Activity {
 
+    private static final int CAMERA_REQUEST = 102;
     TextView drawer_txt, new_note, txt_title, deal_txt;
     EditText title, description;
     Button record, subject;
@@ -46,5 +47,11 @@ public class NewActivity extends Activity {
         share_layout.setVisibility(View.VISIBLE);
 
 
+    }
+
+    public void CaptureImage() {
+
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
 }
