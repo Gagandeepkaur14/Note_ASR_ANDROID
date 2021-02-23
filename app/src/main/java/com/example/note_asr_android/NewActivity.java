@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +24,6 @@ public class NewActivity extends Activity {
     ImageView share_pic, deal_icon;
     FrameLayout share_frame;
     String path;
-
 
 
     @Override
@@ -61,28 +57,13 @@ public class NewActivity extends Activity {
                 startActivity(i);
             }
         });
+
+
+
     }
 
     private void selectImage() {
         gallery();
-    }
-
-    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-        if (reqCode == CAMERA_REQUEST && resultCode == RESULT_OK)
-        {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            share_pic.setImageBitmap(photo);
-            deal_icon.setVisibility(View.GONE);
-            deal_txt.setVisibility(View.GONE);
-        }
-        else if (reqCode == GALLARY_REQUEST){
-            final Uri imageUri = data.getData();
-            Log.e("@#@@","get path"+data.getData());
-            share_pic.setImageURI(imageUri);
-            deal_icon.setVisibility(View.GONE);
-            deal_txt.setVisibility(View.GONE);
-        }
 
     }
 
@@ -103,7 +84,7 @@ public class NewActivity extends Activity {
         });
     }
 
-         public void CaptureImage() {
+            public void CaptureImage() {
 
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
