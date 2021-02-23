@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +27,8 @@ public class NewActivity extends Activity {
     ImageView share_pic, deal_icon;
     FrameLayout share_frame;
     String path;
+
+
 
 
     @Override
@@ -78,17 +83,29 @@ public class NewActivity extends Activity {
                 //  boolean result= Utility.checkPermission(ShareDeal.this);
 
                 if (items[item].equals("Take Photo")) {
+
                     CaptureImage();
+                } else if (items[item].equals("Choose from Library")) {
+                    OpenGallery();
+                } else if(items[item].equals("Cancel")){
+                    dialog.dismiss();
                 }
             }
         });
+        builder.show();
+
     }
 
-            public void CaptureImage() {
+
+    public void CaptureImage() {
 
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }
 
-
+    public void OpenGallery() {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult(photoPickerIntent, GALLARY_REQUEST);
+    }
         }
