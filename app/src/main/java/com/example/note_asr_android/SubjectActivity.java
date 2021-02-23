@@ -7,9 +7,14 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import javax.security.auth.Subject;
+
 public class SubjectActivity extends Activity {
     TextView drawer_txt, new_note, txt_title;
     RecyclerView recyclerView;
+    List<Subject> list;
 
 
     protected void onCreate(Bundle savedInstanceState) {
