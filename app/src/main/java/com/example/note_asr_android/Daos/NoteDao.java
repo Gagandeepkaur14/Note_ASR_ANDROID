@@ -1,5 +1,10 @@
 package com.example.note_asr_android.Daos;
 
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
 import com.example.note_asr_android.Models.Notes;
 
 import java.util.List;
