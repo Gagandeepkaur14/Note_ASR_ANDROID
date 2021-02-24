@@ -29,6 +29,7 @@ import androidx.core.app.ActivityCompat;
 import com.example.note_asr_android.Models.Notes;
 import com.example.note_asr_android.Models.Subjects;
 import com.example.note_asr_android.utils.AudioActivity;
+import com.example.note_asr_android.utils.DataConverter;
 
 import java.io.IOException;
 import java.util.Date;
@@ -91,7 +92,7 @@ public class NewActivity extends Activity {
                     Notes note;
                     if(image != null){
 
-                        note = new Notes(description.getText().toString(),title.getText().toString(),userlocation.getLatitude(),userlocation.getLongitude(),new Date().getTime(),selectedSubject.getSubject_id(),DataConverter.convertImage2ByteArray(image),pathAudio);
+                        note = new Notes(description.getText().toString(),title.getText().toString(),userlocation.getLatitude(),userlocation.getLongitude(),new Date().getTime(),selectedSubject.getSubject_id(), DataConverter.convertImage2ByteArray(image),pathAudio);
                     }
                     else{
                         note = new Notes(description.getText().toString(),title.getText().toString(),userlocation.getLatitude(),userlocation.getLongitude(),new Date().getTime(),selectedSubject.getSubject_id(),null,pathAudio);
