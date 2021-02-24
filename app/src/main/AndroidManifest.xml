@@ -23,7 +23,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Note_ASR_ANDROID">
-        <activity android:name=".MainActivity">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name="com.example.note_asr_android.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name="com.example.note_asr_android.SubjectActivity"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity android:name="com.example.note_asr_android.NewActivity" />
+        <activity android:name="com.example.note_asr_android.ViewActivity" />
+        <activity android:name="com.example.note_asr_android.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
