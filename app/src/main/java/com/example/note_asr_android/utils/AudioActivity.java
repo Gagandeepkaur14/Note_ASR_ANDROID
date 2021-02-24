@@ -8,9 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 public class AudioActivity extends AppCompatActivity {
     TextView drawer_txt,new_note,txt_title;
@@ -66,4 +71,60 @@ public class AudioActivity extends AppCompatActivity {
                 finish();
             }
         });
-}
+
+        record.setTag("record");
+        record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(record.getTag() == "record"){
+                    try {
+                        start();
+                        record.setTag("stop");
+                        record.setText("Stop");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                else{
+                    stop();
+                    record.setText("Record");
+                    record.setTag("record");
+                }
+
+            }
+        });
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    playOrStopRecording(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+    public void start() throws IOException {
+        verifyStoragePermissions(this);
+        String file_path=getApplicationContext().getFilesDir().getPath();
+
+        Long date=new Date().getTime();
+        Date current_time = new Date(Long.valueOf(date));
+        String abc = getFilesDir().getAbsolutePath();
+        File file= new File(abc);
+        path =file+"/audio.m4a";
+        rec.setAudioSource(MediaRecorder.AudioSource.MIC);
+        rec.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        rec.setOutputFile(path);
+        rec.prepare();
+        rec.start();
+    }
