@@ -1,14 +1,16 @@
 package com.example.note_asr_android.Daos;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.note_asr_android.Models.Subjects;
+import com.example.note_asr_android.Models.SubjectsWithNotes;
 
 import java.util.List;
-
+@Dao
 public interface SubjectDao {
     @Query("SELECT * FROM Subjects ")
     List<SubjectsWithNotes> loadSubjectsWithNotes();

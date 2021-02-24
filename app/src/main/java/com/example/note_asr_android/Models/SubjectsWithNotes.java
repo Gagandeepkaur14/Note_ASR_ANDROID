@@ -1,8 +1,11 @@
 package com.example.note_asr_android.Models;
 
+import androidx.room.Embedded;
+import androidx.room.Relation;
+
 import java.util.List;
 
-public class SubjectWithNotes {
+public class SubjectsWithNotes {
     @Embedded
     public Subjects subject;
 

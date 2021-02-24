@@ -4,8 +4,8 @@ import androidx.room.*;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys =)
-public class Notes {
+@Entity(foreignKeys = @ForeignKey(entity = Subjects.class,parentColumns = "subject_id",childColumns = "subject_id_fk",onDelete = CASCADE))
+        public class Notes {
     @PrimaryKey(autoGenerate = true)
     private int note_id;
     private String description;
