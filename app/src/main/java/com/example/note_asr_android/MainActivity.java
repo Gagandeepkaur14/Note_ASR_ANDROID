@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     NotesDatabase notesDatabase;
     List<Notes> listNotes;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -3,15 +3,22 @@ package com.example.note_asr_android;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.note_asr_android.Models.Notes;
+import com.example.note_asr_android.Models.Subjects;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Date;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -20,7 +27,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     TextView drawer_txt, new_note, txt_title;
     double lat, longi;
-
+    Notes note;
+    Subjects sub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +51,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(i);
             }
         });
-
+        Intent i = new Intent();
+        List<Notes> notes = NotesDatabase.getInstance(getApplicationContext()).getNoteDao().getAll();
+        int index = getIntent().getIntExtra("selectedIndex",-1);
+        if (index != -1){
+            note = notes.get(index);
+            lat = note.getLatitude();
+            longi = note.getLongitude();
+            sub = NotesDatabase.getInstance(this).getSubjectDao().getSubject(note.getSubject_id_fk()).get(0);
+            mapFragment.getMapAsync(this);
+        }
 
     }
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -59,6 +75,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        long millisecond = note.getCreated();
+        // or you already have long value of date, use this instead of milliseconds variable.
+        String dateString = DateFormat.format("MM/dd/yyyy", new Date(millisecond)).toString();
+
+        mMap = googleMap;
+        LatLng sydney = new LatLng(lat, longi);
+        MarkerOptions options = new MarkerOptions().position(sydney)
+                .title(note.getTitle())
+                .snippet("Desc: " + note.getDescription()+" Subject: "+sub.getSubject_name() + " Date Created: "+dateString);
+        mMap.addMarker(options);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 
     }
