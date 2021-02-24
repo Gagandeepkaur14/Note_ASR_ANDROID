@@ -128,3 +128,30 @@ public class AudioActivity extends AppCompatActivity {
         rec.prepare();
         rec.start();
     }
+
+    public void stop() {
+        rec.stop();
+        rec.reset();
+        rec.release();
+        Toast.makeText(this,path,Toast.LENGTH_LONG).show();
+
+//        rec.reset();
+
+    }
+
+    public void playOrStopRecording(String path) throws IOException {
+        if(mp.isPlaying()){
+            mp.stop();
+        }
+        else{
+            mp = new MediaPlayer();
+
+            try {
+                mp.setDataSource(path);
+                mp.prepare();
+                mp.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
