@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class SubjectAdapter {
+
 
     public abstract class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.Viewholder> {
 
@@ -44,7 +44,7 @@ public class SubjectAdapter {
             ImageView delete;
             public Viewholder(@NonNull View itemView) {
                 super(itemView);
-                subject=(TextView)itemView.findViewById(R.id.subject_txt);
+                subject=(TextView)itemView.findViewById(R.id.id.subject_txt);
                 delete=(ImageView) itemView.findViewById(R.id.sub_delete);
                 itemView.setOnClickListener(this);
                 itemView.setOnLongClickListener(this);
