@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.note_asr_android.Models.Subjects;
+import com.example.note_asr_android.R;
+
 import java.util.List;
 
 
@@ -44,7 +47,7 @@ import java.util.List;
             ImageView delete;
             public Viewholder(@NonNull View itemView) {
                 super(itemView);
-                subject=(TextView)itemView.findViewById(R.id.id.subject_txt);
+                subject=(TextView)itemView.findViewById(R.id.subject_txt);
                 delete=(ImageView) itemView.findViewById(R.id.sub_delete);
                 itemView.setOnClickListener(this);
                 itemView.setOnLongClickListener(this);
