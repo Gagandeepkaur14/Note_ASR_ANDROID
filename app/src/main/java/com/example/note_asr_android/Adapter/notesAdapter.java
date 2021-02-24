@@ -1,11 +1,14 @@
 package com.example.note_asr_android.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,6 +74,40 @@ public abstract class notesAdapter extends RecyclerView.Adapter<notesAdapter.Vie
 
 
     }
+    @Override
+    public int getItemCount() {
+        return notes.size();
+    }
 
+    public class Viewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        TextView date, title, description, txtSubjectItem;
+        ImageView note_img, delete;
+
+        public Viewholder(@NonNull View itemView) {
+            super(itemView);
+            date = (TextView) itemView.findViewById(R.id.date);
+            title = (TextView) itemView.findViewById(R.id.title);
+            description = (TextView) itemView.findViewById(R.id.desc);
+            note_img = (ImageView) itemView.findViewById(R.id.note_image);
+            delete = (ImageView) itemView.findViewById(R.id.delete);
+            txtSubjectItem = (TextView) itemView.findViewById(R.id.txtSubjectItem);
+            itemView.setOnClickListener(this);
+
+
+        }
+
+
+        @Override
+        public void onClick(View v) {
+
+            Intent i=new Intent(context, ViewActivity.class);
+            i.putExtra("selectedIndex",getAdapterPosition());
+            context.startActivity(i);
+
+        }
+    }
+
+    public abstract void deleteAddress(int i);
 
 }
