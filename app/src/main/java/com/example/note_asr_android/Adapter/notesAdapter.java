@@ -13,7 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.note_asr_android.Models.Notes;
+import com.example.note_asr_android.Models.Subjects;
 import com.example.note_asr_android.R;
+import com.example.note_asr_android.ViewActivity;
 
 import java.util.Date;
 import java.util.List;
